@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royal Fungi | Искусство изысканных грибов</title>
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --dark-green: #1A3A2A;
+            --light-beige: #F5F0E6;
+            --taupe: #8B7D6B;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cormorant Garamond', serif;
+        }
+        
+        body {
+            background-color: var(--light-beige);
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(rgba(26, 58, 42, 0.9), rgba(26, 58, 42, 0.9)), url('https://images.unsplash.com/photo-1536589509356-1546b5a1a0dc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            color: white;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 2rem;
+            position: relative;
+        }
+        
+        .logo {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: 3px;
+            color: var(--gold);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .slogan {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            font-style: italic;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--dark-green);
+            padding: 1rem 2.5rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            background: #e8c252;
+        }
+        
+        nav {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2.5rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+        
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+        
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 1.5rem;
+            animation: bounce 2s infinite;
+            cursor: pointer;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(-20px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(-10px) translateX(-50%);
+            }
+        }
+        
+        section {
+            padding: 5rem 10%;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--dark-green);
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 3px;
+            background: var(--gold);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .product-image {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+        
+        .product-info {
+            padding: 1.5rem;
+        }
+        
+        .product-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark-green);
+        }
+        
+        .product-origin {
+            color: var(--taupe);
+            font-style: italic;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .product-description {
+            margin-bottom: 1.5rem;
+            color: #555;
+        }
+        
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+        
+        .product-button {
+            display: block;
+            width: 100%;
+            padding: 0.8rem;
+            background: var(--dark-green);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .product-button:hover {
+            background: #2a4d3c;
+        }
+        
+        .limited-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--gold);
+            color: var(--dark-green);
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            z-index: 1;
+        }
+        
+        .about {
+            background: var(--dark-green);
+            color: white;
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--gold);
+        }
+        
+        .about-text p {
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+        
+        .testimonials {
+            background-color: #f9f9f9;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .testimonial-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+        
+        .testimonial-card:before {
+            content: '"';
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            font-size: 5rem;
+            color: rgba(212, 175, 55, 0.1);
+            font-family: serif;
+            line-height: 1;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 1rem;
+        }
+        
+        .author-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .author-info h4 {
+            margin-bottom: 0.2rem;
+            color: var(--dark-green);
+        }
+        
+        .author-info p {
+            color: var(--taupe);
+            font-size: 0.9rem;
+        }
+        
+        .contact {
+            text-align: center;
+        }
+        
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--dark-green);
+            font-weight: bold;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        footer {
+            background: var(--dark-green);
+            color: white;
+            padding: 3rem 10%;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--gold);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-icons a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            color: var(--gold);
+        }
+        
+        .copyright {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        @media (max-width: 768px) {
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .logo {
+                font-size: 2.5rem;
+            }
+            
+            .slogan {
+                font-size: 1.2rem;
+            }
+        }
+        
+        /* Анимации */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease forwards;
+        }
+        
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+        
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+        
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Royal Fungi</div>
+            <ul class="nav-links">
+                <li><a href="#products">Коллекция</a></li>
+                <li><a href="#about">О нас</a></li>
+                <li><a href="#testimonials">Отзывы</a></li>
+                <li><a href="#contact">Контакты</a></li>
+            </ul>
+        </nav>
+        
+        <div class="hero-content fade-in">
+            <h1 class="logo">Royal Fungi</h1>
+            <p class="slogan delay-1">Элитные грибы, собранные вручную в самых заповедных уголках планеты. Наслаждение для истинных гурманов.</p>
+            <a href="#products" class="cta-button delay-2">Исследовать коллекцию</a>
+        </div>
+        
+        <div class="scroll-down delay-3">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </header>
+    
+    <section id="products">
+        <h2 class="section-title">Наша эксклюзивная коллекция</h2>
+        <div class="products">
+            <div class="product-card fade-in">
+                <div class="limited-badge">Лимитированная серия</div>
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Белый трюфель">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Альбинос Белый Трюфель</h3>
+                    <p class="product-origin">Пьемонт, Италия</p>
+                    <p class="product-description">Редчайший белый трюфель, собранный вручную под покровом ночи. Аромат, покоривший сердца самых взыскательных шеф-поваров мира.</p>
+                    <p class="product-price">$3,200 за 100г</p>
+                    <a href="#" class="product-button">Приобрести</a>
+                </div>
+            </div>
+            
+            <div class="product-card fade-in delay-1">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1571772996211-2f02c9727629?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Черный трюфель">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Чёрный Перигорский Трюфель</h3>
+                    <p class="product-origin">Перигор, Франция</p>
+                    <p class="product-description">Король кулинарии с насыщенным земляным ароматом. Идеален для создания гастрономических шедевров.</p>
+                    <p class="product-price">$1,800 за 100г</p>
+                    <a href="#" class="product-button">Приобрести</a>
+                </div>
+            </div>
+            
+            <div class="product-card fade-in delay-2">
+                <div class="limited-badge">Новинка</div>
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1604977046806-87b5af5e82b7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Матча гриб">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Золотая Лисичка</h3>
+                    <p class="product-origin">Бургундия, Франция</p>
+                    <p class="product-description">Изысканные грибы с нотками абрикоса и перца. Превращают любое блюдо в произведение искусства.</p>
+                    <p class="product-price">$450 за 100г</p>
+                    <a href="#" class="product-button">Приобрести</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="about" class="about">
+        <div class="about-content fade-in">
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1604977046806-87b5af5e82b7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Сбор грибов">
+            </div>
+            <div class="about-text">
+                <h3>Искусство, дарованное природой</h3>
+                <p>Royal Fungi — это не просто грибы, это наследие, передаваемое из поколения в поколение. Наши эксперты путешествуют по миру в поисках самых редких и изысканных видов грибов.</p>
+                <p>Каждый гриб в нашей коллекции отбирается вручную с соблюдением древних традиций сбора. Мы работаем только с проверенными грибниками, чьи семьи занимаются этим ремеслом столетиями.</p>
+                <p>Наша миссия — открыть вам мир утонченных вкусов и ароматов, которые преобразят ваши гастрономические впечатления.</p>
+                <a href="#contact" class="cta-button">Связаться с нами</a>
+            </div>
+        </div>
+    </section>
+    
+    <section id="testimonials" class="testimonials">
+        <h2 class="section-title">Мнения знатоков</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial-card fade-in">
+                <p class="testimonial-text">Грибы от Royal Fungi — это абсолютно другой уровень. Аромат белого трюфеля настолько интенсивен, что достаточно нескольких грамм, чтобы полностью преобразить блюдо. Настоящее сокровище для любого шеф-повара.</p>
+                <div class="testimonial-author">
+                    <div class="author-image">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Антон Егоров">
+                    </div>
+                    <div class="author-info">
+                        <h4>Антон Егоров</h4>
+                        <p>Шеф-повар ресторана "Le Bernardin"</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial-card fade-in delay-1">
+                <p class="testimonial-text">Как сомелье, я ценю сложные ароматы. Грибы от Royal Fungi обладают такой глубиной и богатством оттенков, что их можно сравнить с лучшими винами мира. Это обязательный ингредиент для создания по-настоящему изысканных блюд.</p>
+                <div class="testimonial-author">
+                    <div class="author-image">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Елена Смирнова">
+                    </div>
+                    <div class="author-info">
+                        <h4>Елена Смирнова</h4>
+                        <p>Главный сомелье, "The Ritz-Carlton"</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial-card fade-in delay-2">
+                <p class="testimonial-text">Я коллекционирую редкие грибы более 20 лет, и могу с уверенностью сказать — качество продукции Royal Fungi безупречно. Их внимание к деталям и условиям хранения делает их лидером на рынке премиальных грибов.</p>
+                <div class="testimonial-author">
+                    <div class="author-image">
+                        <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Дмитрий Иванов">
+                    </div>
+                    <div class="author-info">
+                        <h4>Дмитрий Иванов</h4>
+                        <p>Основатель "Gourmet Club"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="contact" class="contact">
+        <h2 class="section-title">Стать частью избранных</h2>
+        <p style="text-align: center; max-width: 700px; margin: 0 auto 3rem; color: #555;" class="fade-in">Присоединяйтесь к нашему клубу ценителей. Получайте эксклюзивные предложения, приглашения на закрытые дегустации и персональные консультации от наших экспертов.</p>
+        
+        <div class="contact-form fade-in delay-1">
+            <form>
+                <div class="form-group">
+                    <label for="name">Ваше имя</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Электронная почта</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Ваше сообщение</label>
+                    <textarea id="message" required></textarea>
+                </div>
+                <button type="submit" class="cta-button">Отправить</button>
+            </form>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Royal Fungi</h3>
+                <p>Элитные грибы для изысканных ценителей. Совершенство в каждой детали.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Меню</h3>
+                <ul class="footer-links">
+                    <li><a href="#products">Коллекция</a></li>
+                    <li><a href="#about">О нас</a></li>
+                    <li><a href="#testimonials">Отзывы</a></li>
+                    <li><a href="#contact">Контакты</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Контакты</h3>
+                <ul class="footer-links">
+                    <li><i class="fas fa-map-marker-alt"></i> Москва, ул. Тверская, 12</li>
+                    <li><i class="fas fa-phone"></i> +7 (495) 123-45-67</li>
+                    <li><i class="fas fa-envelope"></i> info@royalfungi.com</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2023 Royal Fungi. Все права защищены.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Плавная прокрутка для якорных ссылок
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Анимация при скролле
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const appearOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+        
+        const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    return;
+                } else {
+                    entry.target.classList.add('appear');
+                    appearOnScroll.unobserve(entry.target);
+                }
+            });
+        }, appearOptions);
+        
+        fadeElements.forEach(fader => {
+            appearOnScroll.observe(fader);
+        });
+        
+        // Таймер ограниченного предложения
+        function updateTimer() {
+            const now = new Date();
+            const endOfDay = new Date();
+            endOfDay.setHours(23, 59, 59, 999);
+            
+            const diff = endOfDay - now;
+            
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            document.getElementById('timer').textContent = 
+                `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+        
+        setInterval(updateTimer, 1000);
+        updateTimer();
+    </script>
+</body>
+</html>
